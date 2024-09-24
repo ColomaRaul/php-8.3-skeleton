@@ -1,0 +1,44 @@
+services:
+  postgresql:
+    build:
+      context: ..
+      dockerfile: docker/postgresql/Dockerfile
+    container_name: php_postgresql
+    restart: always
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_PORT: ${DB_PORT}
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - app
+  php:
+    build:
+      context: ./php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ../:/var/www/html:cached
+    networks:
+      - app
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ../:/var/www/html:cached
+    ports:
+      - "80:80"
+    networks:
+      - app
+    env_file:
+      - .env.nginx.local
+
+volumes:
+  postgresql_data:
+
+networks:
+  app:
