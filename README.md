@@ -1,6 +1,6 @@
-# PHP 8.3 Skeleton with Nginx and MySQL
+# PHP 8.3 Skeleton with Nginx and PostgreSQL
 
-This is a simple PHP 8.3 skeleton project that uses Nginx and MySQL. It is intended to be used as a starting point for your own projects.
+This is a simple PHP 8.3 skeleton project that uses Nginx and PostgreSQL. It is intended to be used as a starting point for your own projects.
 
 ## Usage
 
