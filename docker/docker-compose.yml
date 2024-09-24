@@ -3,7 +3,7 @@ services:
     build:
       context: ..
       dockerfile: docker/postgresql/Dockerfile
-    container_name: php_postgresql
+    container_name: php_database
     restart: always
     ports:
       - "${DB_PORT}:${DB_PORT}"
@@ -17,6 +17,7 @@ services:
     networks:
       - app
   php:
+    container_name: php
     build:
       context: ./php
       args:
@@ -26,6 +27,7 @@ services:
     networks:
       - app
   nginx:
+    container_name: php_server
     build:
       context: ./nginx
     volumes:
